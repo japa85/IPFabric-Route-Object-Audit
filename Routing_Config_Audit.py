@@ -3,7 +3,7 @@ from pprint import pprint
 import re
 from datetime import datetime
 
-ipf_servername = "https://ipfabric.nw.mgmt.local"
+ipf_servername = "https://ipfabric"
 ipf_username   = "apiaccess"
 ipf_password   = "apiaccess"
 
