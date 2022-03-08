@@ -134,8 +134,11 @@ class obj_IPFabric:
         for device in device_hash:
             print (' > {}'.format(device))
             EndPoint = "/tables/management/configuration/download?hash={}".format(device_hash[device])
-            output = self.api_get(EndPoint)
-            device_configs[device] = {'config':output.text}
+            try:
+                output = self.api_get(EndPoint)
+                device_configs[device] = {'config':output.text}
+            except:
+                device_configs[device] = {'config':"NO CONFIG"}
         print ('All Configs Extracted\n\n')
 
         return device_configs
