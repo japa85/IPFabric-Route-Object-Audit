@@ -1,13 +1,14 @@
-from IPFabric_Connector import obj_IPFabric
+from IPFabric_Connector import get_configs
 from pprint import pprint
 import re
 from datetime import datetime
+from ipfabric import IPFClient
 
 ipf_servername = "https://ipfabric"
 ipf_username   = "apiaccess"
 ipf_password   = "apiaccess"
 
-Deivce_Limit = 5000
+Device_Limit = 5000
 
 # create regex matches for route-maps, when a route-map is defined,
 # 'route-map' appears at the start of line, whereas  when a route-map is referenced,
@@ -21,8 +22,8 @@ reg_preifx_list_referenced = re.compile(r'.*match ip(?:v6)* address prefix-list 
 # Use IPFabric to get the device configs
 # note, this function has a defined filter for NX-OS, IOS and IOS-XE devices hardcoded
 def get_device_configs():
-    IP_Fabric = obj_IPFabric(ipf_servername, ipf_username, ipf_password)
-    config_dict = IP_Fabric.get_configs(limit=Deivce_Limit)
+    ipf = IPFClient(ipf_servername, token = ipf_token)
+    config_dict = get_configs(ipf, limit=Device_Limit)
     return config_dict
 
 
